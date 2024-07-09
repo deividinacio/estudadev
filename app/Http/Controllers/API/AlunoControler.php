@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 //use App\Models\Aluno;
 use App\Services\AlunoService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class AlunoControler extends Controller
 {
@@ -22,7 +24,11 @@ class AlunoControler extends Controller
     public function index()
     {
         $alunos = $this->alunoService->all();
-        return json_encode($alunos);
+        return response() ->json([
+            'success' => true,
+            'data' => $alunos,
+            'message' => 'Todos alunos retornados.'
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -34,13 +40,19 @@ class AlunoControler extends Controller
         $data = $request-> validate([
             'nome_aluno' => 'required|string',
             'nro_registro' => 'required|numeric',
-            'dat_inicio' => 'required|date'
-
-            // colocar os outros campos
+            'dat_inicio' => 'required|date',
+            'dat_conclusao' => 'nullable|date',
+            'dat_colacao_grau'=> 'nullable|date',
+            'dat_expedicao_diploma' => 'nullable|date'
         ]);
 
         $aluno = $this->alunoService->create($data);
-        return json_encode($aluno);
+       
+        return response() ->json([
+            'success' => true,
+            'data' => $aluno,
+            'message' => 'Aluno inserido.'
+        ], Response::HTTP_CREATED);
         
     }
 
@@ -59,8 +71,12 @@ class AlunoControler extends Controller
     public function update(Request $request, int $id)
     {
         $data = $request-> validate([
-            'nome_aluno' => 'required|string'
-            // colocar os outros campos
+            'nome_aluno' => 'required|string',
+            'nro_registro' => 'required|numeric',
+            'dat_inicio' => 'required|date',
+            'dat_conclusao' => 'nullable|date',
+            'dat_colacao_grau'=> 'nullable|date',
+            'dat_expedicao_diploma' => 'nullable|date'
         ]);
 
         $aluno = $this-> alunoService->update($data, $id);

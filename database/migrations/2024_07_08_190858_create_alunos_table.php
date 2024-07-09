@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nome_aluno');
             $table->integer('nro_registro');
             $table->date('dat_inicio'); // data que o aluno iniciou suas atividades 
-            $table->date('dat_conclusao'); // data que o aluno concluiu o curso
-            $table->date('dat_colacao_grau'); 
-            $table->date('dat_expedicao_diploma'); 
+            $table->date('dat_conclusao') -> nullable(); // data que o aluno concluiu o curso
+            $table->date('dat_colacao_grau') -> nullable(); 
+            $table->date('dat_expedicao_diploma') -> nullable(); 
             $table->timestamps();
         });
     }
