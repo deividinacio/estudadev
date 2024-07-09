@@ -62,7 +62,12 @@ class AlunoControler extends Controller
     public function show(int $id)
     {
         $aluno = $this->alunoService->find($id);
-        return json_encode($aluno);
+        
+        return response() ->json([
+            'success' => true,
+            'data' => $aluno,
+            'message' => 'Aluno listado com sucesso.'
+        ], Response::HTTP_FOUND);
     }
 
     /**
@@ -80,7 +85,12 @@ class AlunoControler extends Controller
         ]);
 
         $aluno = $this-> alunoService->update($data, $id);
-        return json_encode($aluno);
+        
+        return response() ->json([
+            'success' => true,
+            'data' => $data,
+            'message' => 'Aluno atualizado.'
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -90,6 +100,7 @@ class AlunoControler extends Controller
      public function destroy(int $id)
     {
         $this->alunoService->delete($id);
+        return response()->json([], Response::HTTP_NO_CONTENT);
     }
        
 }
