@@ -53,6 +53,7 @@ export default {
             .then(response => {
                 this.aluno.id = response.data.data.id;
                 console.log(response.data);
+               
             })
             .catch(e =>{
                 console.log(e);

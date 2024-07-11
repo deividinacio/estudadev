@@ -14,7 +14,7 @@
                 <div class="">
                   <a href="#" class="btn btn btn-outline-success col-1 m-1"> Concluir </a>
                   <a href="#" class="btn btn btn-outline-warning col-1 m-1"> Editar </a>
-                  <a href="#" class="btn btn btn-outline-danger col-1 m-1"> Excluir </a>
+                  <button class="btn btn btn-outline-danger col-1 m-1" @click="deleteAluno(aluno.id)"> Excluir </button>
                 </div>
             </div>
           </div>
@@ -45,6 +45,16 @@ export default{
       .catch(e => {
         console.log(e);
       });
+    },
+    deleteAluno(id){
+        AlunoDataService.delete(id)
+        .then(response => {
+          console.log(response.data)
+          this.retrieveAlunos()
+        })
+        .catch(e => {
+          console.log(e)
+        });
     },
   },
 

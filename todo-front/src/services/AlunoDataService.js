@@ -12,7 +12,7 @@ class AlunoDataService {
     // eu que add
     delete (id)
     {
-        return http.delete("/alunos", id);
+        return http.delete(`/alunos/${id}`);
     }
 
 }
