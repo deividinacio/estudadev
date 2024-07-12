@@ -2,8 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
-<template>
-  <header>
+<template >
+  <header class="bg-light">
     <nav class="navbar navbar-expand-lg bg-success">
       <div class="container-fluid">
           <RouterLink class="nav-brand" to="/">
@@ -32,9 +32,20 @@ import { RouterLink, RouterView } from 'vue-router'
         </div>
       </div>
     </nav>
-       <div class="container mt-2">
+    <div class="container mt-2">
         <RouterView />
+    </div>
+
+  <footer class="mt-5 ">
+    <nav class="navbar navbar-expand-lg bg-success py-3">
+      <div class="container-fluid">
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <span class="text-white"> By Deivid</span>
+          </div>
       </div>
+    </nav>
+  </footer>
+
   </header>
 </template>
 
