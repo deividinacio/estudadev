@@ -8,13 +8,12 @@
         <div class="col-md-12 mt-3 mb-3" v-for="(aluno, index) in alunos" :key="index"> 
           <div class="card"> 
             <div class="card-body">
-              <span> {{aluno.nome_aluno}}
-
-              </span>
+              <span> {{aluno.nome_aluno}}</span>
                 <div class="">
-                  <a href="#" class="btn btn btn-outline-success col-1 m-1"> Concluir </a>
-                  <a href="#" class="btn btn btn-outline-warning col-1 m-1"> Editar </a>
-                  <button class="btn btn btn-outline-danger col-1 m-1" @click="deleteAluno(aluno.id)"> Excluir </button>
+                 <!-- <a href="#" class="btn btn-outline-success col-1 m-1"> Concluir </a> -->
+                 <!-- <button class="btn btn btn-outline-warning col-1 m-1"> Editar </button> -->
+                  <button class="btn btn-outline-warning col-1 m-1 "><RouterLink class="text-decoration-none btn-outline-warning" :to="{name: 'edit', params:{id: aluno.id}}">Editar</RouterLink> </button>
+                  <button class="btn btn-outline-danger col-1 m-1" @click="deleteAluno(aluno.id)"> Excluir </button>
                 </div>
             </div>
           </div>
@@ -47,15 +46,31 @@ export default{
       });
     },
     deleteAluno(id){
-        AlunoDataService.delete(id)
-        .then(response => {
-          console.log(response.data)
-          this.retrieveAlunos()
-        })
-        .catch(e => {
-          console.log(e)
-        });
+        let resposta = confirm('Tem certeza que deseja excluir este aluno ?')
+          if(resposta)
+          {            
+            AlunoDataService.delete(id)
+            .then(response => {
+              console.log(response.data)
+            
+              this.retrieveAlunos()
+            })
+            .catch(e => {
+              console.log(e)
+            })
+          };
+      },
+       
+    updateAluno(id, data){
+      AlunoDataService.update(id, data)
+      .then(response =>{
+        console.log(response.data)
+      })
+      .catch(e =>{
+        console.log(e)
+      });
     },
+      
   },
 
   mounted(){
